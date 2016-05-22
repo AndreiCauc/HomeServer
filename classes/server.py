@@ -22,6 +22,8 @@ class server(object):
 		return self.__services
 
 	def CallService(self, service_name, service_function, args):
+		print("service input {}_{}_{}".format(service_name, service_function, args))
+
 		#check if self.__services contains the service
 		#if not, check for service in services folder
 		#check for function

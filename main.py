@@ -5,9 +5,9 @@ sys.path.append("services/")
 
 
 from server import *
-from screenmodule import *
+#from screenmodule import *
 
-screen = ScreenModule()
+#screen = ScreenModule()
 myServer = server( 50007 )
 exit = 0
 while exit == 0:
@@ -21,13 +21,13 @@ while exit == 0:
         if (not var or int(var) == 0):
                 if myServer.ServerOn == True:
                         myServer.CloseServer()
-		screen.close()
+		#screen.close()
                 exit = 1
         elif (int(var) == 2):
-                screen.print_message("Server", "Server is closed")
+                #screen.print_message("Server", "Server is closed")
                 myServer.CloseServer()
         elif (int(var) == 1):
-                screen.print_message("Server", "Server is up")
+                #screen.print_message("Server", "Server is up")
                 myServer.StartServer() #create thread on the server to accept connections
         elif (int(var) == 4):
                 myServer.TestLocate()

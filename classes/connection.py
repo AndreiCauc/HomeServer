@@ -41,14 +41,14 @@ class connection(object):
 		try:
 			service_name = input[0]
 			function_name = input[1]
-			#if len(input) > 2
-				
-		
-		#get service_name
-		#get service_function
-		#get args
-		#call function in serveir - self.__server.CallService(service_name, function_name, args) 
-	
+			if len(input) > 2:
+				for i in range(2, len(input)):
+					args += "/{}".format(input[i])
+		except:
+			log.error("Connection", "The input is wrong")
+
+		self.__server.CallService(service_name, function_name, args)
+
 #                my_class = locate("{}.service.service".format(service_name))
 #                try:
 #                        method = getattr(my_class, function_name)
