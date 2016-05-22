@@ -6,11 +6,13 @@ import sys
 import log
 
 class server(object):
-        def __init__(self, PORT):
+        def __init__(self, PORT, services_array):
                 self.__PORT = PORT
                 self.__ServerOn = False
                 self.__connections = []
 		self.__services = {}
+		for string in services_array:
+	        	self.__services[string] = __import__("{}.service".format(string)).service.service()
 
 
         @property
@@ -22,8 +24,17 @@ class server(object):
 		return self.__services
 
 	def CallService(self, service_name, service_function, args):
-		print("service input {}_{}_{}".format(service_name, service_function, args))
-
+		print("service input {}\n function {}\n server args {}".format(service_name, service_function, args))
+		if ( not service_name in self.__services ):
+			log.error("Server", "The service name is incorrect.")
+			return
+		try:
+			method = getattr(self.__services[service_name], service_function)
+			method(args)
+		except:
+			log.error("Server", "Function name is incorrect.")
+				 
+		
 		#check if self.__services contains the service
 		#if not, check for service in services folder
 		#check for function

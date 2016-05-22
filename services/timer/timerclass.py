@@ -12,8 +12,8 @@ class timerclass(object):
 		self.__timerOn = False
 		self.__alarmOn = False
 		self.__timers = []
-		pygame.init()
-		self.__music = pygame.mixer.Sound("sound.wav")
+		#pygame.init()
+		#self.__music = pygame.mixer.Sound("../../sound.wav")
 
 	def AddTimer(self, tm, repeat, week):
 		self.__timers.append(timer(tm, repeat, week))
@@ -39,32 +39,32 @@ class timerclass(object):
 
 			if self.__alarmOn == True:
 				log.info("Alarm", "Alarm is on!")
-				if int(pygame.mixer.get_busy()) == 0:
-	                                self.__music.play()
+				#if int(pygame.mixer.get_busy()) == 0:
+	                                #self.__music.play()
 			time.sleep(1)
 
 
 	def StartAlarm(self):
 		if self.__alarmOn == False:
 			self.__alarmOn = True
-			if int(pygame.mixer.get_busy()) == 0:
-	        	        self.__music.play()
+			#if int(pygame.mixer.get_busy()) == 0:
+	        	        #self.__music.play()
 
 
 	def StopAlarm(self):
 		if self.__alarmOn == True:
 			self.__alarmOn = False
-			if int(pygame.mixer.get_busy()) == 1:
-				self.__music.stop()
+			#if int(pygame.mixer.get_busy()) == 1:
+				#self.__music.stop()
 			log.info("Timer", "Alarm has stopped")
 		return
 
 	def StopTimer(self):
 		if self.__timerOn == True:
 			self.__timerOn = False
-			if int(pygame.mixer.get_busy()) == 1:
-                                self.__music.stop()
+			#if int(pygame.mixer.get_busy()) == 1:
+                                #self.__music.stop()
 			log.info("Timer", "Timer thread is now closed!")
 		
-	def TestSound(self):
-		self.__music.play()
+#	def TestSound(self):
+		#self.__music.play()
