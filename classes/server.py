@@ -10,11 +10,22 @@ class server(object):
                 self.__PORT = PORT
                 self.__ServerOn = False
                 self.__connections = []
+		self.__services = {}
 
 
         @property
         def ServerOn(self):
                 return self.__ServerOn
+
+	@property
+	def Services(self):
+		return self.__services
+
+	def CallService(self, service_name, service_function, args):
+		#check if self.__services contains the service
+		#if not, check for service in services folder
+		#check for function
+		#call the function
 
         def StartServer(self):
                 self.s = socket.socket()
