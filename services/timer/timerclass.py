@@ -40,7 +40,6 @@ class timerclass(object):
 						self._timers.remove(tmr)
 
 			if self._alarmOn == True:
-				log.info("Alarm", "Alarm is on!")
 				#if int(pygame.mixer.get_busy()) == 0:
 	                                #self._music.play()
 			time.sleep(1)
