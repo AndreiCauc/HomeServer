@@ -5,14 +5,14 @@ import log
 
 class connection(object):
         def __init__(self, conn, addr, server):
-                self.__conn = conn
-                self.__addr = addr
-                self.__server = server
+                self._conn = conn
+                self._addr = addr
+                self._server = server
 
         def CheckForData(self):
-                if self.__server.ServerOn == True:
+                if self._server.ServerOn == True:
                         log.success("Connection", "Waiting for data from connection")
-                        data = self.__conn.recv(64)
+                        data = self._conn.recv(64)
                         if not data:
                                 return
 			self.SendAction(data)
@@ -24,13 +24,13 @@ class connection(object):
                 self.Close()
 
         def Close(self):
-                self.__server.CloseConnection(self)
-                self.__conn.close()
+                self._server.CloseConnection(self)
+                self._conn.close()
                 log.success("Connection", "Connection is closed!")
                 return
 
         def ForceClosing(self):
-                self.__conn.close()
+                self._conn.close()
                 return
 
         def SendAction(self, data):
@@ -47,11 +47,4 @@ class connection(object):
 		except:
 			log.error("Connection", "The input is wrong")
 
-		self.__server.CallService(service_name, function_name, args)
-
-#                my_class = locate("{}.service.service".format(service_name))
-#                try:
-#                        method = getattr(my_class, function_name)
-#                        method()
-#                except:
-#                        log.error("Connection", "There is no service or function with the given input")
+		self._server.CallService(service_name, function_name, args)
