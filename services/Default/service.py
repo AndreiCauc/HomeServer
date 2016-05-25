@@ -7,9 +7,8 @@ class service(object):
 		print("Here is the initialisation")
 
 	# This is how a function should look like
-	# Args is a array of variables ( "var1" = 3, "var2" = "test" ) #TODO map required variables to sent variables
-        def test(self, args):
-                print("Default function")
+        def test(self, arg1, arg2):
+                print("Default function - {}, {}".format(arg1, arg2))
 
 
 	# This is the close service function 

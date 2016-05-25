@@ -3,13 +3,15 @@ import threading
 sys.path.append('classes/')
 sys.path.append("services/")
 from server import *
-from timer.service import service as Timer
+from rpitrack import *
 
 config_array = ["timer", "lighting"]
 
 #from screenmodule import *
 #screen = ScreenModule()
 myServer = server( 50007, config_array )
+rpt = RPiTrack()
+
 exit = 0
 while exit == 0:
         print("0 EXIT")
@@ -17,6 +19,8 @@ while exit == 0:
         print("2 Close Server")
         print("3 Close connections")
         print("4 Send Message to all connections")
+	print("5 Display RPi informations")
+
         var = raw_input("What to do \n")
 
         if (not var or int(var) == 0):
@@ -33,3 +37,8 @@ while exit == 0:
                 myServer.StartServer() #create thread on the server to accept connections
         elif (int(var) == 4):
                 myServer.TestLocate()
+	elif (int(var) == 5):
+		rpt.getCPUuse()
+		rpt.getCPUtemperature()
+		rpt.getRAMinfo()
+		rpt.getDiskSpace()

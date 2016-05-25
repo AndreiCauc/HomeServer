@@ -24,13 +24,17 @@ class server(object):
 		return self.__services
 
 	def CallService(self, service_name, service_function, args):
+		if args != "":
+			args = args[1:]
 		print("service input {}\n function {}\n server args {}".format(service_name, service_function, args))
 		if ( not service_name in self.__services ):
 			log.error("Server", "The service name is incorrect.")
 			return
 		try:
 			method = getattr(self.__services[service_name], service_function)
-			method(args)
+			args = args.split("/")
+			print(args)
+			method(*args)
 		except:
 			log.error("Server", "Function name is incorrect.")
 				 
