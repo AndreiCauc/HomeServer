@@ -5,7 +5,7 @@ sys.path.append("services/")
 from server import *
 from rpitrack import *
 
-config_array = ["timer", "lighting"]
+config_array = ["timer", "lighting", "water"]
 
 #from screenmodule import *
 #screen = ScreenModule()

@@ -15,7 +15,8 @@ class connection(object):
                         data = self._conn.recv(64)
                         if not data:
                                 return
-			self.SendAction(data)
+			self._conn.sendall(self.SendAction(data))
+			
                        #try:
                        #         input = data.split("/")
                        #         self.SendAction(input[0], input[1])
@@ -47,4 +48,4 @@ class connection(object):
 		except:
 			log.error("Connection", "The input is wrong")
 
-		self._server.CallService(service_name, function_name, args)
+		return self._server.CallService(service_name, function_name, args)

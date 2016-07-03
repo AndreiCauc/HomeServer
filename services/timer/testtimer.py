@@ -9,7 +9,7 @@ while exit == 0:
 	print("0: Exit")
 	print("1: Start timer")
 	print("2: Stop timer")
-	print("3 :Stop alarm")
+	print("3: Stop alarm")
 	print("4: Add timer (HHMM)")
 	print("5: Check sound")
 
@@ -25,7 +25,8 @@ while exit == 0:
 	elif int(action) == 3:
 		myTimer.StopAlarm()
 	elif int(action) == 4:
-		tm = raw_input("Time HHMM")
-		myTimer.AddTimer(tm, False, False)
+		tm = raw_input("Time HHMM ")
+		mess = raw_input("Message ")
+		myTimer.AddTimer(int(tm), False, False, mess)
 	elif int(action) == 5:
 		myTimer.TestSound()

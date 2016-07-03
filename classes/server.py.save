@@ -29,19 +29,15 @@ class server(object):
 			log.error("Server", "The service name is incorrect.")
 			return
 		#try:
-		method = getattr(self._services[service_name], service_function)
-		args = args.split("/")
+		ethod = getattr(self._services[service_name], service_function)
+			args = args.split("/")
 
-		if args[0] != "":
-			res = method(*args)
-			log.info("Recieved", res)
-			return res
-		else:
-			res = method()
-			log.info("Recieved", res)
-			return res
-		#except:
-			#log.error("Server", "Function name is incorrect.")
+			if args[0] != "":
+				log.info("Recieved", method(*args))
+			else:
+				log.info("Recieved", method())
+		except:
+			log.error("Server", "Function name is incorrect.")
 				 
 		
 		#check if self._services contains the service

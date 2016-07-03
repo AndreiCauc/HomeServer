@@ -57,25 +57,25 @@ class timerclass(object):
 	def StartAlarm(self):
 		if self._alarmOn == False:
 			self._alarmOn = True
-			#if int(pygame.mixer.get_busy()) == 0:
+			return "Alarm has st!"
 	        	        #self._music.play()
-		return
+		return "Alarm allready off"
+
 
 	def StopAlarm(self):
 		if self._alarmOn == True:
 			self._alarmOn = False
 			#if int(pygame.mixer.get_busy()) == 1:
 				#self._music.stop()
-			return ("Alarm has stopped")
-		return "Alarm is allready off"
+			return( "Alarm has stopped")
+		return
 
 	def StopTimer(self):
 		if self._timerOn == True:
 			self._timerOn = False
 			#if int(pygame.mixer.get_busy()) == 1:
                                 #self._music.stop()
-			return ("Timer thread is now closed!")
-		return "Timer is allready off"
+			log.info("Timer", "Timer thread is now closed!")
 		
 #	def TestSound(self):
 		#self._music.play()
