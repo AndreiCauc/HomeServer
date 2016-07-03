@@ -10,19 +10,19 @@ class connection(object):
                 self._server = server
 
         def CheckForData(self):
-                if self._server.ServerOn == True:
+                while self._server.ServerOn == True:
                         log.success("Connection", "Waiting for data from connection")
-                        data = self._conn.recv(64)
-                        if not data:
-                                return
-			self._conn.sendall(self.SendAction(data))
+	                try: 
+				data = self._conn.recv(64)
+	                        if not data:
+        	                        return
+				self._conn.sendall(self.SendAction(data))
+			except:
+				log.info("Connection", "Connection has expired")
+				self.Close()
+				return
 			
-                       #try:
-                       #         input = data.split("/")
-                       #         self.SendAction(input[0], input[1])
-                       # except:
-                       #         log.error("Connection", "Invalid data input")
-                self.Close()
+                #self.Close()
 
         def Close(self):
                 self._server.CloseConnection(self)

@@ -9,7 +9,7 @@ config_array = ["timer", "lighting", "water"]
 
 #from screenmodule import *
 #screen = ScreenModule()
-myServer = server( 50007, config_array )
+myServer = server( 50007, config_array, 5 )
 rpt = RPiTrack()
 
 exit = 0

@@ -6,12 +6,13 @@ import sys
 import log
 
 class server(object):
-        def __init__(self, PORT, services_array):
+        def __init__(self, PORT, services_array, timeout):
                 self._PORT = PORT
                 self._ServerOn = False
                 self._connections = []
 		self._services = {}
 		self._services_array = services_array
+		self._timeout = timeout
 
         @property
         def ServerOn(self):
@@ -24,26 +25,24 @@ class server(object):
 	def CallService(self, service_name, service_function, args):
 		if args != "":
 			args = args[1:]
-		#print("service input {}\n function {}\n server args {}".format(service_name, service_function, args))
 		if ( not service_name in self._services ):
 			log.error("Server", "The service name is incorrect.")
 			return
-		#try:
-		method = getattr(self._services[service_name], service_function)
-		args = args.split("/")
+		try:
+			method = getattr(self._services[service_name], service_function)
+			args = args.split("/")
 
-		if args[0] != "":
-			res = method(*args)
-			log.info("Recieved", res)
-			return res
-		else:
-			res = method()
-			log.info("Recieved", res)
-			return res
-		#except:
-			#log.error("Server", "Function name is incorrect.")
+			if args[0] != "":
+				res = method(*args)
+				log.info("Recieved", res)
+				return res
+			else:
+				res = method()
+				log.info("Recieved", res)
+				return res
+		except:
+			log.error("Server", "Function name is incorrect.")
 				 
-		
 		#check if self._services contains the service
 		#if not, check for service in services folder
 		#check for function
@@ -53,6 +52,7 @@ class server(object):
                 self.s = socket.socket()
                 self.s.bind(("", self._PORT))
                 self.s.listen(5)
+		#self.s.settimeout(self._timeout)
                 self._ServerOn = True
                 self._connections = []
                 acc_connections_thread = threading.Thread( target = self.AcceptConnections )
@@ -70,6 +70,8 @@ class server(object):
                 log.success("Server", "Server started accepting connections")
                 while self._ServerOn == True:
                         c, addr = self.s.accept()
+			log.info("New connection", "We have a new connection!!")
+			c.settimeout(self._timeout)
                         conn = connection(c, addr, self)
                         new_thread = threading.Thread(target = conn.CheckForData )
                         new_thread.start()
